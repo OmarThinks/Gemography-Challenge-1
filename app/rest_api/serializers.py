@@ -35,5 +35,5 @@ class GithubSearchRepoSerializer(serializers.Serializer):
                 "date can not be more than today")
         return date
 
-    def create(self, validated_data):
-        return build_queries(**validated_data)
+    """def create(self, validated_data):
+        return build_queries(**validated_data)"""

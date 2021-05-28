@@ -18,14 +18,12 @@ pytest -rP --junitxml=test-reports/junit.xml --html=test-reports/pytest_report.h
 
 
 class GithubSearchRepoSerializerTestCase(unittest.TestCase):
-	def test_001(self):
-		queries = build_queries(
-			date = "2019-04-29", order = "asc", records=99)
-		self.assertEqual(queries, [
-			"https://api.github.com/search/repositories?"+
-			"q=created:>{date}&sort=stars&order={order}"+
-			"&per_page=100&page={page}".format(
-			date = "2019-04-29", order = "asc", page = 1)])
+	def test_001_failure(self):
+		ser = GithubSearchRepoSerializer(data={
+			"date":"abc", "order":123, "records":100000000})
+		#ser.validate()
+		print(ser.is_valid())
+
 		print("test_001:asc one page")
 
 	def test_002(self):
