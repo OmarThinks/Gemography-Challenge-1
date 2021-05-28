@@ -2,6 +2,15 @@ from rest_framework import serializers
 
 from datetime import datetime
 
+def build_query(date,order):
+	return "https://api.github.com/search/repositories?"+
+	"q=created:>{date}&sort=stars&order={order}".format(
+		date = date, order = order)	
+
+
+
+
+
 class GithubSearchRepoSerializer(serializers.Serializer):
     date = serializers.DateField(
         format="%d-%m-%Y", input_formats=['%d-%m-%Y'])
@@ -18,5 +27,4 @@ class GithubSearchRepoSerializer(serializers.Serializer):
         return value
 
     def create(self, validated_data):
-        pass
-        #return Comment(**validated_data)
+        return build_query(**validated_data)
