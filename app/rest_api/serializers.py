@@ -3,7 +3,7 @@ from rest_framework import serializers
 from datetime import datetime
 
 def build_queries(date, order, records):
-	pages = int(records/100) + 1
+	pages = int((records-1)/100) + 1
 	queries = []
 	for page in range(1,pages+1):
 		queries.append(
