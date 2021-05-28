@@ -2,11 +2,17 @@ from rest_framework import serializers
 
 from datetime import datetime
 
-def build_query(date,order):
-	return "https://api.github.com/search/repositories?"+
-	"q=created:>{date}&sort=stars&order={order}".
-	"&per_page=100&page=1".format(
-		date = date, order = order)	
+def build_queries(date, order, records):
+	pages = int(records/100) + 1
+	queries = []
+	for page in xrange(1,pages+1):
+		queries.append(
+			"https://api.github.com/search/repositories?"+
+			"q=created:>{date}&sort=stars&order={order}".
+			"&per_page=100&page={page}".format(
+			date = date, order = order, page = page)	
+			)
+	return queries
 
 
 
@@ -28,4 +34,4 @@ class GithubSearchRepoSerializer(serializers.Serializer):
         return value
 
     def create(self, validated_data):
-        return build_query(**validated_data)
+        return build_queries(**validated_data)
