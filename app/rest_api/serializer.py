@@ -23,15 +23,17 @@ class GithubSearchRepoSerializer(serializers.Serializer):
         format="%d-%m-%Y", input_formats=['%d-%m-%Y'])
     order = serializers.ChoiceField(
         [("desc","desc"),("asc","asc")])
+    records = serializers.IntegerField(
+        min_value = 1, max_value = 1000)
 
-    def validate_date(self, value):
+    def validate_date(self, date):
         """
         Validate if date is more than now
         """
-        if (value > datetime.today().date()):
+        if (date > datetime.today().date()):
             raise serializers.ValidationError(
-                "the value of date can not be more than today")
-        return value
+                "date can not be more than today")
+        return date
 
     def create(self, validated_data):
         return build_queries(**validated_data)
