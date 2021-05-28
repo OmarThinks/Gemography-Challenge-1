@@ -20,6 +20,20 @@ class QueriesBuilderTestCase(unittest.TestCase):
 			"&per_page=100&page={page}".format(
 			date = "2019-04-29", order = "decs", page = 1)])
 
+	def test_003_test(self):
+		queries = build_queries(
+			date = "2019-04-29", order = "decs", records=101)
+		self.assertEqual(queries, [
+			"https://api.github.com/search/repositories?"+
+			"q=created:>{date}&sort=stars&order={order}"+
+			"&per_page=100&page={page}".format(
+			date = "2019-04-29", order = "decs", page = 1),
+			"https://api.github.com/search/repositories?"+
+			"q=created:>{date}&sort=stars&order={order}"+
+			"&per_page=100&page={page}".format(
+			date = "2019-04-29", order = "decs", page = 2),
+			])
+
 
 # Make the tests conveniently executable
 if __name__ == "__main__":
