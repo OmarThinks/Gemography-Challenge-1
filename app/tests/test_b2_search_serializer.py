@@ -28,13 +28,36 @@ class GithubSearchRepoSerializerTestCase(unittest.TestCase):
 		#print(dict(ser.validated_data))
 		self.assertEqual(dict(ser.validated_data),
 			self.success_data)
-		print("test_001:asc one page")
+		print("test_001:Sucessful Serialization")
 	
-	def test_002_failure(self):
-		ser = GithubSearchRepoSerializer(data={
-			"date":"abc", "order":123, "records":100000000})
+	def test_002_date_failure_1(self):
+		wrong_date_data = dict(self.success_data)
+		wrong_date_data["date"] = 123
+		ser = GithubSearchRepoSerializer(data=wrong_date_data)
 		self.assertEqual(ser.is_valid(),False)
-		print("test_001:asc one page")
+		print("test_001:Wrong date 1")
+
+	def test_002_date_failure_2(self):
+		wrong_date_data = dict(self.success_data)
+		wrong_date_data["date"] = "2019/04/29"
+		ser = GithubSearchRepoSerializer(data=wrong_date_data)
+		self.assertEqual(ser.is_valid(),False)
+		print("test_001:Wrong date 2")
+
+	def test_003_order_failure(self):
+		wrong_order_data = dict(self.success_data)
+		wrong_order_data["order"] = "aaaaaaaa"
+		ser = GithubSearchRepoSerializer(data=wrong_order_data)
+		self.assertEqual(ser.is_valid(),False)
+		print("test_001:Wrong Order")
+
+	def test_004_records_failure(self):
+		wrong_records_data = dict(self.success_data)
+		wrong_records_data["order"] = 10000000000 
+		#Too amny records
+		ser = GithubSearchRepoSerializer(data=wrong_records_data)
+		self.assertEqual(ser.is_valid(),False)
+		print("test_001:Wrong Records")
 
 	def test_002(self):
 		queries = build_queries(
