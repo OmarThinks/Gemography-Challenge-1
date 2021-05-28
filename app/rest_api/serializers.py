@@ -10,8 +10,8 @@ def build_queries(date, order, records):
 			"repositories?q=created:>"+str(date)+
 			"&sort=stars&order="+str(order)+
 			"&per_page=100&page="+str(page))
-		print(page, date, order, records)
-		print(toappend)
+		#print(page, date, order, records)
+		#print(toappend)
 		queries.append(str(toappend))
 	return queries
 

@@ -30,7 +30,7 @@ class QueriesBuilderTestCase(unittest.TestCase):
 		mysrt = "https://api.github.com/search/repositories?"+"q=created:>{date_format}&sort=stars&order={order_format}"+"&per_page=100&page={page}"
 		
 		mysrt.format(date_format = "123", order_format = "456", page = 1)
-		print(mysrt)
+		#print(mysrt)
 		print("test_000:testing string formatting")
 
 

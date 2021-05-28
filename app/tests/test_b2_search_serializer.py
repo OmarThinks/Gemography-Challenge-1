@@ -64,7 +64,11 @@ class GithubSearchRepoSerializerTestCase(unittest.TestCase):
 		ser = GithubSearchRepoSerializer(data=self.success_data)
 		self.assertEqual(ser.is_valid(),True)
 		queries = ser.save()
-		print(queries)
+		#print(queries)
+		self.assertEqual(queries,[
+			'https://api.github.com/search/'+
+			'repositories?q=created:>2019-04-29&sort='+
+			'stars&order=asc&per_page=100&page=1'])
 		print("test_006:Serializer building Queries")
 
 
