@@ -18,14 +18,16 @@ pytest -rP --junitxml=test-reports/junit.xml --html=test-reports/pytest_report.h
 
 
 class GithubSearchRepoSerializerTestCase(unittest.TestCase):
+	def setUp(self):
+		self.success_data = {
+			"date":"2019-04-29", "order":"asc", "records":99}
+	
 	def test_001_success(self):
-		ser = GithubSearchRepoSerializer(data={
-			"date":"2019-04-29", "order":"asc", "records":99})
+		ser = GithubSearchRepoSerializer(data=self.success_data)
 		self.assertEqual(ser.is_valid(),True)
 		#print(dict(ser.validated_data))
 		self.assertEqual(dict(ser.validated_data),
-			{'date': '2019-04-29', 'order': 'asc', 
-				'records': 99})
+			self.success_data)
 		print("test_001:asc one page")
 	
 	def test_002_failure(self):
