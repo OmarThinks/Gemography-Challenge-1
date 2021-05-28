@@ -1,7 +1,14 @@
 import unittest
 from rest_api.serializers import build_queries
 
+
 """
+Here we will test the queries builder
+"""
+
+"""
+To run the tests
+
 pytest
 pytest -rP
 pytest -rP --junitxml=test-reports/junit.xml --html=test-reports/pytest_report.html --self-contained-html
