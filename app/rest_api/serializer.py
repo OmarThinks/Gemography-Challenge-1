@@ -4,7 +4,8 @@ from datetime import datetime
 
 def build_query(date,order):
 	return "https://api.github.com/search/repositories?"+
-	"q=created:>{date}&sort=stars&order={order}".format(
+	"q=created:>{date}&sort=stars&order={order}".
+	"&per_page=100&page=1".format(
 		date = date, order = order)	
 
 
