@@ -15,22 +15,14 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from rest_framework import routers
-
 
 
 from rest_api.views import github_search_repo_view
 from frontend.views import (homepage)
 
-# Routers provide an easy way of automatically determining the URL conf.
-router = routers.DefaultRouter()
-#router.register(r'search', github_search_repo_view.as_view())
-#router.register(r'hello', github_search_repo_view, basename="hello")
 
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('api/', include((router.urls))),
     path('api/search', github_search_repo_view),
     path('', homepage),
 ]

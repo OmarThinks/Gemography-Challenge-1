@@ -2,7 +2,7 @@ from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
 import requests
-
+import json
 # Create your views here.
 
 from .serializers import (GithubSearchRepoSerializer, build_queries)
@@ -22,9 +22,9 @@ def github_search_repo_view(request):
 	#print(dict(q_params),flush=True)
 	result = github_search_repos(**q_params)
 	
+	#print(json.dumps(result,indent=4),flush=True)
+	
 	if result["success"]:
 		return Response(result)
 	return Response(result, 
 			status=status.HTTP_422_UNPROCESSABLE_ENTITY)
-	"""return Response({"success":True}, 
-			status=status.HTTP_422_UNPROCESSABLE_ENTITY)"""	
