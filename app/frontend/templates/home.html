@@ -1,7 +1,11 @@
+
+
 <!DOCTYPE html>
 <html>
 <head>
 	<title>Home Page</title>
+	<script type="text/javascript" src="/static/js/jquery.js"></script>
+
 </head>
 <body>
 
@@ -27,13 +31,6 @@ var currentDate = date.toISOString().substring(0,10);
 document.getElementById('form_date').value = currentDate;
 
 
-
-
-
-
-
-
-
 function submitForm()
 {	
 	var form_records = document.getElementById('form_records').value;
@@ -42,7 +39,30 @@ function submitForm()
 	console.log(form_records, form_date, form_order);
 
 
+
+$.ajax({
+  url: "/api/search",
+  type: "get", //send it through get method
+  data: {
+  	"date":form_date,
+  	"order":form_order,
+  	"records":form_records
+  }
+}).done(function() {
+  console.log("done");
+});
+
+
+
+
 }
+
+
+
+
+
+
+
 
 </script>
 
