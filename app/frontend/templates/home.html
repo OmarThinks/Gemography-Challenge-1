@@ -149,7 +149,7 @@ for (var i = 0; i < data.length; i++) {
 
 
      	var h = document.createElement('h1');
-     	h.innerHTML  = (i+1)+") "+data[i].language;
+     	h.innerHTML  = (i+1)+") "+data[i].language + " ("+data[i].length+")";
     	document.getElementById("repos").appendChild(h);    	
  
         tbl_repo  = document.createElement('table');
@@ -168,7 +168,6 @@ for (var i = 0; i < data.length; i++) {
 
      	tr.appendChild(th_number);
      	tr.appendChild(th_name);
-     	tr.appendChild(th_number);
      	tr.appendChild(th_full_name);
      	tr.appendChild(th_url);
      	tr.appendChild(th_lang);
@@ -178,6 +177,26 @@ for (var i = 0; i < data.length; i++) {
     	for (var repo = 0; repo < repos.length; repo++) {
     		console.log(repos[repo]);
 
+
+	    	var tr = document.createElement('tr');
+	    	var td_number = document.createElement('td');
+	    	var td_name = document.createElement('td');
+	    	var td_full_name = document.createElement('td');
+	    	var td_url = document.createElement('td');
+	    	var td_lang = document.createElement('td');
+	    	
+	    	td_number.innerHTML = repo+1;
+	    	td_name.innerHTML = repos[repo]["name"];
+	    	td_full_name.innerHTML = repos[repo]["full_name"];
+	    	td_url.innerHTML = repos[repo]["url"];
+	    	td_lang.innerHTML = repos[repo]["language"];
+
+	     	tr.appendChild(td_number);
+	     	tr.appendChild(td_name);
+	     	tr.appendChild(td_full_name);
+	     	tr.appendChild(td_url);
+	     	tr.appendChild(td_lang);
+			tbl_repo.appendChild(tr);
 
     	}
     	document.getElementById("repos").appendChild(tbl_repo);    	
