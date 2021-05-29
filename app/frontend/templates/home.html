@@ -6,16 +6,26 @@
 	<title>Home Page</title>
 	<script type="text/javascript" src="/static/js/jquery.js"></script>
 
+<style type="text/css">
+	.err_msg{color:red;}
+</style>
+
+
 </head>
 <body>
 
 <form onsubmit="event.preventDefault(); return submitForm();">
-	Number of Repositories: <input type="number" name="records" value=100 id="form_records"><br>
-	Date: <input type="date" name="date" id="form_date"><br>
+	Number of Repositories: <input type="number" name="records" value=100 id="form_records">
+	<span class="err_msg" id="records_error"></span> <br>
+
+
+	Date: <input type="date" name="date" id="form_date">
+	<span class="err_msg" id="date_error"></span> <br>
 	Order: <select name="order" id="form_order">
 	  <option value="desc" selected>Descending</option>
 	  <option value="asc">Ascending</option>
-	</select><br><br>
+	</select>	
+	<span class="err_msg" id="order"></span> <br><br>
 	<input type="submit" value="Submit">
 </form>
 
@@ -36,6 +46,18 @@ date.setMonth(date.getMonth() - 1);
 var currentDate = date.toISOString().substring(0,10);
 document.getElementById('form_date').value = currentDate;
 
+function zero_errors(){
+	var error_elements = document.getElementsByClassName('err_msg');
+	for (var i = error_elements.length - 1; i >= 0; i--) {
+		error_elements[i].innerHTML="";
+	}
+}
+
+
+
+
+
+
 
 function submitForm()
 {	
@@ -43,6 +65,7 @@ function submitForm()
 	var form_date = document.getElementById('form_date').value;
 	var form_order = document.getElementById('form_order').value;
 	console.log(form_records, form_date, form_order);
+	zero_errors();
 
 	document.getElementById('langs').innerHTML = "Loading, Please Wait ...";
 	document.getElementById('repos').innerHTML = "Loading, Please Wait ...";
@@ -57,10 +80,11 @@ $.ajax({
   }
 }).catch(function(resp) {
   var errors = resp.responseJSON.data;
-  console.log(errors);
+  //console.log(errors);
   for (err in errors) {
-  console.log(err);
-  console.log(errors[err][0]);
+  //console.log(err);
+  //console.log(errors[err][0]);
+  document.getElementById(err+"_error").innerHTML = errors[err][0];
 }
 
 
