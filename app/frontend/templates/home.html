@@ -127,18 +127,26 @@ function tableCreate(data){
      	tr.appendChild(th_repos);
     	tbdy.appendChild(tr);
 
-    for (var i = data.length - 1; i >= 0; i--) {
-    	
+for (var i = 0; i < data.length; i++) {
     	var tr = document.createElement('tr');
-    	var td = document.createElement('td');
-    	td.innerHTML = data[i].language;
-    	tr.appendChild(td);
+    	var td_num = document.createElement('td');
+    	var td_lang = document.createElement('td');
+    	var td_repos = document.createElement('td');
+    	
+    	td_num.innerHTML = i+1;
+    	td_lang.innerHTML = data[i].language;
+    	td_repos.innerHTML = data[i].length;
+    	
+    	tr.appendChild(td_num);
+    	tr.appendChild(td_lang);
+    	tr.appendChild(td_repos);
     	console.log(data[i]);
     	tbdy.appendChild(tr);
     	tbl.appendChild(tbdy);
     }
-
-    body.appendChild(tbl);
+    //body.appendChild(tbl);
+    document.getElementById("langs").innerHTML = tbl.outerHTML;
+    console.log(tbl);
 }
 
 
