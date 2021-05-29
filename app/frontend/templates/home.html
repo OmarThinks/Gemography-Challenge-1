@@ -88,7 +88,7 @@ $.ajax({
   }
 })
 .done(function(resp){
-console.log(resp);
+//console.log(resp);
 tableCreate(resp.data);
 
 })
@@ -140,13 +140,54 @@ for (var i = 0; i < data.length; i++) {
     	tr.appendChild(td_num);
     	tr.appendChild(td_lang);
     	tr.appendChild(td_repos);
-    	console.log(data[i]);
+    	//console.log(data[i]);
     	tbdy.appendChild(tr);
     	tbl.appendChild(tbdy);
+
+
+
+
+
+     	var h = document.createElement('h1');
+     	h.innerHTML  = (i+1)+") "+data[i].language;
+    	document.getElementById("repos").appendChild(h);    	
+ 
+        tbl_repo  = document.createElement('table');
+    	var tr = document.createElement('tr');
+    	var th_number = document.createElement('th');
+    	var th_name = document.createElement('th');
+    	var th_full_name = document.createElement('th');
+    	var th_url = document.createElement('th');
+    	var th_lang = document.createElement('th');
+    	
+    	th_number.innerHTML = "Number";
+    	th_name.innerHTML = "Name";
+    	th_full_name.innerHTML = "Full name";
+    	th_url.innerHTML = "url";
+    	th_lang.innerHTML = "Language";
+
+     	tr.appendChild(th_number);
+     	tr.appendChild(th_name);
+     	tr.appendChild(th_number);
+     	tr.appendChild(th_full_name);
+     	tr.appendChild(th_url);
+     	tr.appendChild(th_lang);
+		tbl_repo.appendChild(tr);
+
+    	var repos = data[i].repos;
+    	for (var repo = 0; repo < repos.length; repo++) {
+    		console.log(repos[repo]);
+
+
+    	}
+    	document.getElementById("repos").appendChild(tbl_repo);    	
+
+
+
     }
     //body.appendChild(tbl);
     document.getElementById("langs").innerHTML = tbl.outerHTML;
-    console.log(tbl);
+    //console.log(tbl);
 }
 
 
