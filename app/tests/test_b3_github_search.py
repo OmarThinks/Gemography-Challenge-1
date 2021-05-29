@@ -1,6 +1,6 @@
 import unittest
 from rest_api.github_search import github_search_repos
-
+import json
 
 """
 Here we will test the rest_api/github_search.py
@@ -25,7 +25,8 @@ class GithubSearchRepoSerializerTestCase(unittest.TestCase):
 		search_results = github_search_repos(
 			**self.success_data)
 		self.assertEqual(search_results["success"],True)
-		print(search_results)
+		#print(search_results)
+		print(json.dumps(search_results, indent=4, sort_keys=True))
 		print("test_001:Sucessful search")
 
 
