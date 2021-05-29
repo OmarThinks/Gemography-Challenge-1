@@ -2,6 +2,8 @@ from .serializers import (GithubSearchRepoSerializer, build_queries)
 import requests
 import json
 
+"""
+
 dummy_data = {
 	"data": [
 		{
@@ -607,7 +609,7 @@ dummy_data = {
 	],
 	"success": True
 }
-
+"""
 
 
 def handle_data(data):
