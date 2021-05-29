@@ -35,7 +35,7 @@ The inputs are passed as query parameters:
 	- Min Value : 1
 	- Max Value : 1000
 
-Example:
+## Example:
 
 <b>
 
@@ -114,10 +114,41 @@ The response will look like:
         ...
     ]
 }
-
 ```
 
 </b>
+
+
+## Displaying errors:
+
+
+<b>
+
+```
+http://127.0.0.1:8000/api/search
+```
+</b>
+
+
+The response will look like:
+
+
+<b>
+
+```json
+{
+	"success":false,
+	"data":
+	{
+		"date":["This field is required."],
+		"order":["This field is required."],
+		"records":["This field is required."]
+	}
+}
+```
+
+</b>
+
 
 
 
