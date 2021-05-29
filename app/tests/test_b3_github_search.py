@@ -26,7 +26,7 @@ class GithubSearchRepoSerializerTestCase(unittest.TestCase):
 			**self.success_data)
 		self.assertEqual(search_results["success"],True)
 		#print(search_results)
-		print(json.dumps(search_results, indent=4, sort_keys=True))
+		#print(json.dumps(search_results, indent=4, sort_keys=True))
 		print("test_001:Sucessful search")
 
 

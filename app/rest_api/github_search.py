@@ -610,14 +610,47 @@ dummy_data = {
 
 
 
+def handle_data(data):
+	formatted_data = dict()
+	for repo in data:
+		lang = str(repo["language"])
+		if lang == "None":
+			continue
+		if formatted_data.get(lang) == None:
+			formatted_data[lang] = {
+			"repos":[],
+			"length":0,
+			"language": lang
+			}
+		formatted_data[lang]["repos"].append(repo)
+		formatted_data[lang]["length"] =len(
+			formatted_data[lang]["repos"])
+
+	#print(formatted_data.items())
+	sorted_languages_names = sorted(formatted_data, 
+		key=lambda item: formatted_data[item]["length"],
+		reverse=True)
+	handled_data = []
+	for l_name in sorted_languages_names:
+		handled_data.append(
+			formatted_data[l_name])
+	#print(json.dumps(, handle_data(sorted_data)
+	#	indent=4, sort_keys=True))
+	#handle_data(sorted_data)
+	print(sorted_languages_names)
+	#print(handled_data)
+	print(json.dumps(handled_data,
+		indent=4, sort_keys=True))
+	return formatted_data
+
 
 
 
 
 def handle_queries(queries):
 	# get the response from the URL
-	print("queries",queries)
-	items = []
+	#print("queries",queries)
+	"""items = []
 	for q in queries:
 		for item in requests.get(q).json()["items"]:
 			languages_request = requests.get(
@@ -629,14 +662,20 @@ def handle_queries(queries):
 				"language": item["language"]
 				}
 			items.append(item_data)
-	#print(json.dumps(items, indent=4, sort_keys=True))
+	remove this comment after you are done withhandle_data 
+	"""
+	items = dummy_data["data"]
+	#print(json.dumps(items,
+	#	indent=4, sort_keys=True))
+	
+	handle_data(items)
 	return items
 
 
 
 
 def github_search_repos(**kwargs):
-	print(kwargs)
+	#print(kwargs)
 	ser = GithubSearchRepoSerializer(data = kwargs)
 	if not ser.is_valid():
 		return {"success":False, "data":ser.errors}
