@@ -8,6 +8,14 @@
 
 <style type="text/css">
 	.err_msg{color:red;}
+	table, th, td 
+	{
+  		border: 1px solid black;
+	}
+
+	table {
+	  border-collapse: collapse;
+	}
 </style>
 
 
@@ -78,7 +86,13 @@ $.ajax({
   	"order":form_order,
   	"records":form_records
   }
-}).catch(function(resp) {
+})
+.done(function(resp){
+console.log(resp);
+tableCreate(resp.data);
+
+})
+.catch(function(resp) {
   var errors = resp.responseJSON.data;
   //console.log(errors);
   for (err in errors) {
@@ -86,13 +100,45 @@ $.ajax({
   //console.log(errors[err][0]);
   document.getElementById(err+"_error").innerHTML = errors[err][0];
 }
-
-
 });
+}
 
 
 
 
+
+
+function tableCreate(data){
+    var body = document.body,
+        tbl  = document.createElement('table');
+      var tbdy = document.createElement('tbody');
+
+    	var tr = document.createElement('tr');
+    	var th_number = document.createElement('th');
+    	var th_lang = document.createElement('th');
+    	var th_repos = document.createElement('th');
+    	
+    	th_number.innerHTML = "Number";
+    	th_lang.innerHTML = "Language";
+    	th_repos.innerHTML = "Number of Repositories";
+
+     	tr.appendChild(th_number);
+     	tr.appendChild(th_lang);
+     	tr.appendChild(th_repos);
+    	tbdy.appendChild(tr);
+
+    for (var i = data.length - 1; i >= 0; i--) {
+    	
+    	var tr = document.createElement('tr');
+    	var td = document.createElement('td');
+    	td.innerHTML = data[i].language;
+    	tr.appendChild(td);
+    	console.log(data[i]);
+    	tbdy.appendChild(tr);
+    	tbl.appendChild(tbdy);
+    }
+
+    body.appendChild(tbl);
 }
 
 
