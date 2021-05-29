@@ -26,3 +26,5 @@ def github_search_repo_view(request):
 		return Response(result)
 	return Response(result, 
 			status=status.HTTP_422_UNPROCESSABLE_ENTITY)
+	"""return Response({"success":True}, 
+			status=status.HTTP_422_UNPROCESSABLE_ENTITY)"""	
