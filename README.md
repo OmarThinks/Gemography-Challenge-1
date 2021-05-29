@@ -5,3 +5,24 @@
 
 # Gemography-Challenge-1
 Submitting a challenge to Gemography
+
+
+
+
+## Challenge Reference:
+
+<a href="https://github.com/gemography/backend-coding-challenge">
+Backend Challenge</a>
+
+
+
+
+
+
+## 1) RESTful API:
+
+
+
+
+
+
