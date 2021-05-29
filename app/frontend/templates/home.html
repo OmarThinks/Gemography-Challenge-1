@@ -55,8 +55,15 @@ $.ajax({
   	"order":form_order,
   	"records":form_records
   }
-}).done(function() {
-  
+}).catch(function(resp) {
+  var errors = resp.responseJSON.data;
+  console.log(errors);
+  for (err in errors) {
+  console.log(err);
+  console.log(errors[err][0]);
+}
+
+
 });
 
 
