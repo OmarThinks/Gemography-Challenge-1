@@ -5,7 +5,7 @@
 </head>
 <body>
 
-<form>
+<form onsubmit="event.preventDefault(); return submitForm();">
 	Number of Repositories: <input type="number" name="records" value=100 id="form_records"><br>
 	Date: <input type="date" name="date" id="form_date"><br>
 	Order: <select name="order" id="form_order">
@@ -15,6 +15,36 @@
 	<input type="submit" value="Submit">
 </form>
 
+
+
+<script type="text/javascript">
+
+
+
+    let date = new Date(Date.now());
+	date.setMonth(date.getMonth() - 1);
+	var currentDate = date.toISOString().substring(0,10);
+	document.getElementById('form_date').value = currentDate;
+
+
+
+
+
+
+
+
+
+function submitForm()
+{	
+	var form_records = document.getElementById('form_records').value;
+	var form_date = document.getElementById('form_date').value;
+	var form_order = document.getElementById('form_order').value;
+
+	console.log(form_records, new Date(form_date), form_order);
+  return false;
+}
+
+</script>
 
 </body>
 </html>
