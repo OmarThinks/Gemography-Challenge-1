@@ -7,6 +7,7 @@ import requests
 
 from .serializers import (GithubSearchRepoSerializer, build_queries)
 
+from .github_search import github_search_repos
 
 
 
@@ -25,15 +26,14 @@ def handle_queries(queries):
 
 @api_view(['GET'])
 def github_search_repo_view(request):
-	q_params = request.query_params
-	print(q_params)
-	ser = GithubSearchRepoSerializer(data = q_params)
-	responses = []
-	if not ser.is_valid():
-		errors = ser.errors
-		return Response({"errors":errors, "success":False}, 
+	
+	params = request.query_params
+	q_params={}
+	for key in params:
+		q_params[key] = params[key]
+	result = github_search_repos(**q_params)
+	if result["success"]:
+		return Response(result)
+	return Response(result, 
 			status=status.HTTP_422_UNPROCESSABLE_ENTITY)
-	handle_queries(responses)
-	return Response({"message": "Hello for today! See you tomorrow!"})
-
 

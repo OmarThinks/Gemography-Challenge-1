@@ -611,7 +611,7 @@ dummy_data = {
 
 
 def handle_data(data):
-	print(len(data))
+	#print(len(data))
 	formatted_data = dict()
 	for repo in data:
 		lang = str(repo["language"])
@@ -640,7 +640,10 @@ def handle_data(data):
 
 
 
-def handle_queries(queries, records):
+def handle_queries(queries,records):
+	#print("queries",queries,flush=True)
+	#print("records",records,flush=True)
+	#print("records",type(records),flush=True)
 	# get the response from the URL
 	#print("queries",queries)
 	items = []
@@ -658,14 +661,13 @@ def handle_queries(queries, records):
 	return handle_data(items[0:records])
 
 
-
-
 def github_search_repos(**kwargs):
 	#print(kwargs)
 	ser = GithubSearchRepoSerializer(data = kwargs)
 	if not ser.is_valid():
 		return {"success":False, "data":ser.errors}
 	return {"success":True, 
-	"data": handle_queries(ser.save(),kwargs["records"])}
+	"data": handle_queries(ser.save(),
+		ser.validated_data["records"])}
 
 
