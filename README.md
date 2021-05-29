@@ -19,7 +19,7 @@ Backend Challenge</a>
 
 
 
-# 1) RESTful API:
+# 1) Backend (RESTful API):
 
 The RESTful API has only one endpoint:
 
@@ -148,6 +148,71 @@ The response will look like:
 ```
 
 </b>
+
+
+
+
+# 2) Frontend:
+
+
+The application has a frontend in this url:  
+<a href="http://127.0.0.1:8000/">http://127.0.0.1:8000/</a> 
+
+
+The frontend looks like this:
+
+
+---
+
+
+<img src="images/frontend_1.png">
+
+
+---
+
+When submitting the result, it will look like this:
+
+
+
+<img src="images/frontend_2.png">
+
+---
+
+<img src="images/frontend_3.png">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
