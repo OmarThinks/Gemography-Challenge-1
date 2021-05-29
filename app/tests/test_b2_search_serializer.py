@@ -4,7 +4,7 @@ from rest_api.serializers import (
 
 
 """
-Here we will test the 
+Here we will test the serach serlizer
 """
 
 """
