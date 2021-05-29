@@ -27,6 +27,17 @@ class GithubSearchRepoSerializerTestCase(unittest.TestCase):
 		self.assertEqual(search_results["success"],True)
 		#print(search_results)
 		#print(json.dumps(search_results, indent=4, sort_keys=True))
+		data = search_results["data"]
+		for language in data:
+			self.assertEqual(type(language["language"]),str)
+			self.assertEqual(language["length"]>=1,True)
+			for repo in language["repos"]:
+				self.assertEqual(type(repo["url"]),str)
+				self.assertEqual(type(repo["name"]),str)
+				self.assertEqual(type(repo["full_name"]),str)
+				self.assertEqual(repo["language"],
+					language["language"])
+
 		print("test_001:Sucessful search")
 
 
