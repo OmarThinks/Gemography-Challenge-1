@@ -23,11 +23,13 @@ from rest_api.views import github_search_repo_view
 
 # Routers provide an easy way of automatically determining the URL conf.
 router = routers.DefaultRouter()
-router.register(r'search', ProductViewSet)
+#router.register(r'search', github_search_repo_view.as_view())
+#router.register(r'hello', github_search_repo_view, basename="hello")
 
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/', include((router.urls))),
+    path('api/search', github_search_repo_view),
 ]
 

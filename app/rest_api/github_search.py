@@ -17,7 +17,7 @@ def handle_queries(queries):
 
 def github_search_repos(**kwargs):
 	print(q_params)
-	ser = GithubSearchRepoSerializer(**kwargs)
+	ser = GithubSearchRepoSerializer(data = **kwargs)
 	responses = []
 	if not ser.is_valid():
 		return {"success":False, "data":ser.errors}
