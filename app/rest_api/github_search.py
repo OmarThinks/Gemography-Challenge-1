@@ -1,5 +1,4 @@
 from .serializers import (GithubSearchRepoSerializer, build_queries)
-
 import requests
 
 
@@ -16,7 +15,7 @@ def handle_queries(queries):
 
 
 
-def github_search_repo_view(**kwargs):
+def github_search_repos(**kwargs):
 	print(q_params)
 	ser = GithubSearchRepoSerializer(**kwargs)
 	responses = []
