@@ -26,7 +26,6 @@ def handle_queries(queries):
 
 @api_view(['GET'])
 def github_search_repo_view(request):
-	
 	params = request.query_params
 	q_params={}
 	for key in params:
