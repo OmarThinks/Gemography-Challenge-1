@@ -22,7 +22,7 @@ def handle_queries(queries):
 
 
 @api_view(['GET'])
-def github_search_repo(request):
+def github_search_repo_view(request):
 	q_params = request.query_params
 	print(q_params)
 	ser = GithubSearchRepoSerializer(**q_params)
