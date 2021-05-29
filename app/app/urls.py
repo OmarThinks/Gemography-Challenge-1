@@ -20,6 +20,7 @@ from rest_framework import routers
 
 
 from rest_api.views import github_search_repo_view
+from frontend.views import (homepage)
 
 # Routers provide an easy way of automatically determining the URL conf.
 router = routers.DefaultRouter()
@@ -31,5 +32,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/', include((router.urls))),
     path('api/search', github_search_repo_view),
+    path('', homepage),
 ]
 
