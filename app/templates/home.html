@@ -21,10 +21,10 @@
 
 
 
-    let date = new Date(Date.now());
-	date.setMonth(date.getMonth() - 1);
-	var currentDate = date.toISOString().substring(0,10);
-	document.getElementById('form_date').value = currentDate;
+let date = new Date(Date.now());
+date.setMonth(date.getMonth() - 1);
+var currentDate = date.toISOString().substring(0,10);
+document.getElementById('form_date').value = currentDate;
 
 
 
@@ -39,9 +39,9 @@ function submitForm()
 	var form_records = document.getElementById('form_records').value;
 	var form_date = document.getElementById('form_date').value;
 	var form_order = document.getElementById('form_order').value;
+	console.log(form_records, form_date, form_order);
 
-	console.log(form_records, new Date(form_date), form_order);
-  return false;
+
 }
 
 </script>
