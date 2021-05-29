@@ -249,6 +249,13 @@ These artifacts contain the results of the tests.
 
 
 
+# Todos:
+
+
+1. More Options when submitting the form, because Github has many more options
+2. Add GraphQL
+3. Enhance Frontend
+
 
 
 
