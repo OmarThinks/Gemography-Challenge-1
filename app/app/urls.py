@@ -17,13 +17,15 @@ from django.contrib import admin
 from django.urls import path, include
 
 
-from rest_api.views import github_search_repo_view
+from rest_api.views import github_search_repo_view,github_search_repo_view_new
 from frontend.views import (homepage)
 
 
 
 urlpatterns = [
-    path('api/search', github_search_repo_view),
+    path('api/search/', github_search_repo_view),
+    path('api/search/new/', github_search_repo_view_new),
+
     path('', homepage),
 ]
 
