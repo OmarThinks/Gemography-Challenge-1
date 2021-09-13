@@ -125,8 +125,7 @@ class GithubReopsViewSet(viewsets.ViewSet):
 
 	
 
-
-
+from pprint import pp
 class CustomBrowsableAPIRenderer(BrowsableAPIRenderer):
 	template = "backend_base.html"
 	
@@ -134,7 +133,8 @@ class CustomBrowsableAPIRenderer(BrowsableAPIRenderer):
 		self, data, accepted_media_type, renderer_context):
 		context = BrowsableAPIRenderer.get_context(
 			self, data, accepted_media_type, renderer_context)
-		print(context)
+		context["display_edit_forms "]=True
+		pp(context)
 		context["Hey"]="Wassup"
 		return context
 
