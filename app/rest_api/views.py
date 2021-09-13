@@ -126,9 +126,7 @@ class GithubReopsViewSet(viewsets.ViewSet):
 	
 
 from pprint import pp
-class CustomBrowsableAPIRenderer(BrowsableAPIRenderer):
-	template = "backend_base.html"
-	
+class CustomBrowsableAPIRenderer(BrowsableAPIRenderer):	
 	def get_context(
 		self, data, accepted_media_type, renderer_context):
 		context = BrowsableAPIRenderer.get_context(
