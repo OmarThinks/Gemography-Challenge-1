@@ -132,8 +132,43 @@ class CustomBrowsableAPIRenderer(BrowsableAPIRenderer):
 		context = BrowsableAPIRenderer.get_context(
 			self, data, accepted_media_type, renderer_context)
 		context["display_edit_forms "]=True
-		pp(context)
 		context["Hey"]="Wassup"
+		view = renderer_context['view']
+		request = renderer_context['request']
+		context["post_form"]=self.get_rendered_html_form(
+			data, view, 'POST', request)
+		context["raw_data_post_form"] = self.get_raw_data_form(
+			data, view, 'POST', request)
+		
+		print("self","\n\n")
+		pp(self.__dict__)
+		
+		print("data","\n\n")
+		pp(data.__dict__)
+		
+		print("view","\n\n")
+		pp(view.__dict__)
+		
+		print("request","\n\n")
+		pp(request.__dict__)
+		pp(context)
+		
+		serializer = data.serializer
+		print(serializer)
+		form_renderer = self.form_renderer_class()
+		form = form_renderer.render(
+			serializer.data,
+			self.accepted_media_type,
+			{'style': {'template_pack': 'rest_framework/horizontal'}}
+		)
+
+		print(form)
+		print(form.__dict__)
+
+		context["put_form"] = form
+
+
+
 		return context
 
 
