@@ -17,7 +17,9 @@ from django.contrib import admin
 from django.urls import path, include
 
 
-from rest_api.views import github_search_repo_view,github_search_repo_view_new
+from rest_api.views import (
+    github_search_repo_view,github_search_repo_view_new,
+    github_search_repo_view_mod)
 from frontend.views import (homepage)
 
 
@@ -25,6 +27,7 @@ from frontend.views import (homepage)
 urlpatterns = [
     path('api/search/', github_search_repo_view),
     path('api/search/new/', github_search_repo_view_new),
+    path('api/search/mod/', github_search_repo_view_mod),
 
     path('', homepage),
     path('api/',include("rest_api.urls")),

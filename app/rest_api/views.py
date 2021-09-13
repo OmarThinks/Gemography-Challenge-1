@@ -57,7 +57,11 @@ from rest_framework import viewsets
 
 
 
-from rest_framework.renderers import BrowsableAPIRenderer
+from rest_framework.renderers import (
+	BrowsableAPIRenderer, TemplateHTMLRenderer, JSONRenderer)
+from rest_framework.decorators import action, renderer_classes
+
+
 
 class GithubReopsViewSet(viewsets.ViewSet):
 	serializer_class = GithubSearchRepoSerializer
@@ -87,16 +91,50 @@ class GithubReopsViewSet(viewsets.ViewSet):
 		renderer_context = self.get_renderer_context()
 		view = renderer_context['view']
 		print("view",view)
-		data = serializer.data.copy()
+		data = serializer.data
 		print("data",data)
-		renderer_context["put_form"] = (
-			BrowsableAPIRenderer.get_rendered_html_form(
+		renderer_context["post_form"] = BrowsableAPIRenderer.get_rendered_html_form(
 			self = self.get_renderers()[1], data = data, 
-			view=view, method='PUT', request = request))
-		print(renderer_context["put_form"], flush=True)
-		print("type", type(renderer_context["put_form"]), flush=True)
+			view=view, method='POST', request = request)
+		renderer_context["post_form"] = serializer
+		renderer_context["display_edit_forms"]=True
+		print(renderer_context["post_form"], flush=True)
+		print("type", type(renderer_context["post_form"]), flush=True)
 		response.renderer_context = renderer_context
 		#print(type(renderer_context))
 		#print((renderer_context))
 		return response
+
+		@action(detail=True, methods=['get'])
+		def scratch(self, request):
+			return Response({"success":True})
+
+
+
+
+
+@api_view(['GET'])
+@renderer_classes([
+	JSONRenderer, BrowsableAPIRenderer, TemplateHTMLRenderer])
+def github_search_repo_view_mod(request):
+	response = Response({"success":True},
+		template_name='base.html')
+	serializer = GithubSearchRepoSerializer(
+		data=request.query_params)
+	if serializer.is_valid(raise_exception=False):
+		response = Response(serializer.validated_data,
+		template_name='base.html')
+		print("serialzer is valid")
+	else:
+		response = Response(serializer.errors,
+		template_name='base.html')		
+		print("serialzer is not valid")
+	
+	response.renderer_context={"serializer":serializer}
+	return response
+
+
+
+
+
 
