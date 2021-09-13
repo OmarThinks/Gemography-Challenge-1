@@ -10,7 +10,7 @@ from rest_framework import viewsets
 
 from .serializers import (GithubSearchRepoSerializer, build_queries)
 
-from .github_search import github_search_repos
+from .github_search import (github_search_repos,get_ordered_repos_response)
 
 
 from .github_search import handle_queries
@@ -36,12 +36,6 @@ def github_search_repo_view(request):
 			status=status.HTTP_422_UNPROCESSABLE_ENTITY)
 
 
-def get_ordered_repos_response(serializer):
-		serializer.is_valid(raise_exception=True)
-		response = Response({"success":True, 
-			"data": handle_queries(serializer.save(),
-			serializer.validated_data["records"])})
-		return response	
 
 
 class GithubReopsViewSetAgain(viewsets.ViewSet):
