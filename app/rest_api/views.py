@@ -32,8 +32,12 @@ def github_search_repo_view(request):
 @api_view(['GET'])
 def github_search_repo_view_new(request):
 	params = request.query_params
-	#print(dict(params),flush=True)
-	
+	print(dict(params),flush=True)
+	print(type(params),flush=True)
+	serializer = GithubSearchRepoSerializer(data=request.query_params)
+	serializer.is_valid(raise_exception=True)
+	#self.perform_create(serializer)
+	#headers = self.get_success_headers(serializer.data)
 	"""for key in params:
 		q_params[key] = params[key]
 	#print(dict(q_params),flush=True)
