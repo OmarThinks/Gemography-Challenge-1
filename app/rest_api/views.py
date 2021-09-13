@@ -123,11 +123,30 @@ class GithubReopsViewSet(viewsets.ViewSet):
 			return Response({"success":True})
 
 
+	
+
+
 
 class CustomBrowsableAPIRenderer(BrowsableAPIRenderer):
 	template = "backend_base.html"
 	
-		
+	def get_context(
+		self, data, accepted_media_type, renderer_context):
+		context = BrowsableAPIRenderer.get_context(
+			self, data, accepted_media_type, renderer_context)
+		print(context)
+		context["Hey"]="Wassup"
+		return context
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -146,15 +165,16 @@ def github_search_repo_view_mod(request):
 		response = Response(serializer.errors)		
 		#print("serialzer is not valid")
 	#print(response.renderer_context)
-	response.renderer_context={"display_edit_forms ":True,
+	"""response.renderer_context={"display_edit_forms ":True,
 	"post_form":True,"content":"adkjaksj","urlize":"adkjaksj",
 	"raw_data_post_form ":"sfljsldkfjs",
 	"abc":"ad;kjd"}
 	response.context = {"display_edit_forms ":True,
 	"post_form":True,"content":"adkjaksj","urlize":"adkjaksj",
 	"raw_data_post_form ":"sfljsldkfjs",
-	"abc":"ad;kjd"}
+	"abc":"ad;kjd"}"""
 	#return response
+	print(response.__dict__)
 	return render(request, "backend_base.html")
 
 
@@ -163,7 +183,7 @@ def github_search_repo_view_mod(request):
 
 @api_view(['GET'])
 @renderer_classes([
-	JSONRenderer, BrowsableAPIRenderer,TemplateHTMLRenderer])
+	JSONRenderer, CustomBrowsableAPIRenderer])
 def github_search_repo_view_compare(request):
 	serialzer = serializer = GithubSearchRepoSerializer(
 		data=request.query_params)
@@ -173,7 +193,48 @@ def github_search_repo_view_compare(request):
 	else:
 		response = Response(serializer.errors)
 	
+	response.context_data = {"Hey":"Wassup"}
+	print(response.__dict__)
+
+	rendered = response.render()
+
+
+	print(rendered)
+
 	return response
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+class GithubReopsViewSetAgain(viewsets.ViewSet):
+	serializer_class = GithubSearchRepoSerializer
+	renderer_classes = [
+	JSONRenderer,CustomBrowsableAPIRenderer]
+	
+	def list(self, request):
+		serialzer = serializer = GithubSearchRepoSerializer(
+			data=request.query_params)
+		if serializer.is_valid(raise_exception=True):
+			response = Response(serializer.validated_data)
+		else:
+			response = Response(serializer.errors)
+		
+		return response
+
+
+
+
+
 
 
 
