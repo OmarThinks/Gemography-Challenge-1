@@ -13,6 +13,9 @@ from .serializers import (GithubSearchRepoSerializer, build_queries)
 from .github_search import github_search_repos
 
 
+from .github_search import handle_queries
+
+
 
 
 @api_view(['GET'])
@@ -33,7 +36,12 @@ def github_search_repo_view(request):
 			status=status.HTTP_422_UNPROCESSABLE_ENTITY)
 
 
-
+def get_ordered_repos_response(serializer):
+		serializer.is_valid(raise_exception=True)
+		response = Response({"success":True, 
+			"data": handle_queries(serializer.save(),
+			serializer.validated_data["records"])})
+		return response	
 
 
 class GithubReopsViewSetAgain(viewsets.ViewSet):
@@ -41,18 +49,15 @@ class GithubReopsViewSetAgain(viewsets.ViewSet):
 	renderer_classes = [JSONRenderer,BrowsableAPIRenderer]
 	
 	def list(self, request):
-		serialzer = serializer = GithubSearchRepoSerializer(
+		serializer = GithubSearchRepoSerializer(
 			data=request.query_params)
-		serializer.is_valid(raise_exception=True)
-		response = Response(serializer.validated_data)
-		return response
+		return get_ordered_repos_response(serializer)
 
 	def create(self, request):
-		serialzer = serializer = GithubSearchRepoSerializer(
+		serializer = GithubSearchRepoSerializer(
 			data=request.data)
-		serializer.is_valid(raise_exception=True)
-		response = Response(serializer.validated_data)
-		return response
+		return get_ordered_repos_response(serializer)
+
 
 
 
