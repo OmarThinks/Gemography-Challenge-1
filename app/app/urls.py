@@ -21,25 +21,6 @@ from rest_api.views import (github_search_repo_view)
 from frontend.views import (homepage)
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 urlpatterns = [
     path('api/search/', github_search_repo_view),
 

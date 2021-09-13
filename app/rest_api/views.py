@@ -37,7 +37,7 @@ def github_search_repo_view(request):
 
 
 
-
+"""
 
 from pprint import pp
 class CustomBrowsableAPIRenderer(BrowsableAPIRenderer):	
@@ -46,18 +46,24 @@ class CustomBrowsableAPIRenderer(BrowsableAPIRenderer):
 		context = BrowsableAPIRenderer.get_context(
 			self, data, accepted_media_type, renderer_context)
 		
-		serializer = data.serializer
-		print(serializer)
-		form_renderer = self.form_renderer_class()
-		form = form_renderer.render(
-			serializer.data,
-			self.accepted_media_type,
-			{'style': {'template_pack': 'rest_framework/horizontal'}}
-		)
-		context["put_form"] = form
+		try:
+			serializer = data.serializer
+			print(serializer)
+			form_renderer = self.form_renderer_class()
+			form = form_renderer.render(
+				serializer.data,
+				self.accepted_media_type,
+				{'style': {'template_pack': 'rest_framework/horizontal'}}
+			)
+			context["put_form"] = form
+			print(form)
+		except Exception as e:
+			pass
 		return context
 
 
+
+"""
 
 
 
@@ -76,7 +82,7 @@ class CustomBrowsableAPIRenderer(BrowsableAPIRenderer):
 class GithubReopsViewSetAgain(viewsets.ViewSet):
 	serializer_class = GithubSearchRepoSerializer
 	renderer_classes = [
-	JSONRenderer,CustomBrowsableAPIRenderer]
+	JSONRenderer,BrowsableAPIRenderer]
 	
 	def list(self, request):
 		serialzer = serializer = GithubSearchRepoSerializer(
@@ -85,8 +91,18 @@ class GithubReopsViewSetAgain(viewsets.ViewSet):
 			response = Response(serializer.validated_data)
 		else:
 			response = Response(serializer.errors)
-		
 		return response
+
+	def create(self, request):
+		serialzer = serializer = GithubSearchRepoSerializer(
+			data=request.data)
+		if serializer.is_valid(raise_exception=True):
+			response = Response(serializer.validated_data)
+		else:
+			response = Response(serializer.errors)
+		return response
+
+
 
 
 
