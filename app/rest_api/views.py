@@ -56,12 +56,15 @@ from rest_framework import viewsets
 
 
 
+
+from rest_framework.renderers import BrowsableAPIRenderer
+
 class GithubReopsViewSet(viewsets.ViewSet):
-	serializer_class = GithubReopsViewSet
+	serializer_class = GithubSearchRepoSerializer
 	def list(self, request):
 		params = request.query_params
-		serializer = self.get_serializer(data=request.query_params)
-		serializer.is_valid(raise_exception=True)
+		serializer = GithubSearchRepoSerializer(data=request.query_params)
+		serializer.is_valid(raise_exception=False)
 		print(serializer.validated_data, flush =True)
 		#self.perform_create(serializer)
 		#headers = self.get_success_headers(serializer.data)
@@ -76,5 +79,24 @@ class GithubReopsViewSet(viewsets.ViewSet):
 			return Response(result)
 		return Response(result, 
 				status=status.HTTP_422_UNPROCESSABLE_ENTITY)"""
-		return Response({"success":True})
+
+		#print(serializer.__dir__(), flush=True)
+		#print(serializer.data.copy(), flush=True)
+		response = Response({"success":True})
+		
+		renderer_context = self.get_renderer_context()
+		view = renderer_context['view']
+		print("view",view)
+		data = serializer.data.copy()
+		print("data",data)
+		renderer_context["put_form"] = (
+			BrowsableAPIRenderer.get_rendered_html_form(
+			self = self.get_renderers()[1], data = data, 
+			view=view, method='PUT', request = request))
+		print(renderer_context["put_form"], flush=True)
+		print("type", type(renderer_context["put_form"]), flush=True)
+		response.renderer_context = renderer_context
+		#print(type(renderer_context))
+		#print((renderer_context))
+		return response
 

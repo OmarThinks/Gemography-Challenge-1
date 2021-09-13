@@ -27,5 +27,7 @@ urlpatterns = [
     path('api/search/new/', github_search_repo_view_new),
 
     path('', homepage),
+    path('api/',include("rest_api.urls")),
+
 ]
 
