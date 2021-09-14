@@ -97,7 +97,7 @@ $.ajax({
 })
 .done(function(resp){
 //console.log(resp);
-tableCreate2(resp.data);
+tableCreate(resp.data);
 
 })
 .catch(function(resp) {
@@ -114,116 +114,16 @@ tableCreate2(resp.data);
 
 
 
-
-
-function tableCreate(data){
-    var body = document.body;
-        tbl  = document.createElement('table');
-      var tbdy = document.createElement('tbody');
-
-    	var tr = document.createElement('tr');
-    	var th_number = document.createElement('th');
-    	var th_lang = document.createElement('th');
-    	var th_repos = document.createElement('th');
-    	
-    	th_number.innerHTML = "Number";
-    	th_lang.innerHTML = "Language";
-    	th_repos.innerHTML = "Number of Repositories";
-
-     	tr.appendChild(th_number);
-     	tr.appendChild(th_lang);
-     	tr.appendChild(th_repos);
-    	tbdy.appendChild(tr);
-
-for (var i = 0; i < data.length; i++) {
-    	var tr = document.createElement('tr');
-    	var td_num = document.createElement('td');
-    	var td_lang = document.createElement('td');
-    	var td_repos = document.createElement('td');
-    	
-    	td_num.innerHTML = i+1;
-    	td_lang.innerHTML = data[i].language;
-    	td_repos.innerHTML = data[i].length;
-    	
-    	tr.appendChild(td_num);
-    	tr.appendChild(td_lang);
-    	tr.appendChild(td_repos);
-    	//console.log(data[i]);
-    	tbdy.appendChild(tr);
-    	tbl.appendChild(tbdy);
-
-
-
-
-
-     	var h = document.createElement('h1');
-     	h.innerHTML  = (i+1)+") "+data[i].language + " ("+data[i].length+")";
-    	document.getElementById("repos").appendChild(h);    	
- 
-      tbl_repo  = document.createElement('table');
-    	var tr = document.createElement('tr');
-    	var th_number = document.createElement('th');
-    	var th_name = document.createElement('th');
-    	var th_full_name = document.createElement('th');
-    	var th_url = document.createElement('th');
-    	var th_lang = document.createElement('th');
-    	
-    	th_number.innerHTML = "Number";
-    	th_name.innerHTML = "Name";
-    	th_full_name.innerHTML = "Full name";
-    	th_url.innerHTML = "url";
-    	th_lang.innerHTML = "Language";
-
-     	tr.appendChild(th_number);
-     	tr.appendChild(th_name);
-     	tr.appendChild(th_full_name);
-     	tr.appendChild(th_url);
-     	tr.appendChild(th_lang);
-		tbl_repo.appendChild(tr);
-
-    	var repos = data[i].repos;
-    	for (var repo = 0; repo < repos.length; repo++) {
-    		console.log(repos[repo]);
-
-
-	    	var tr = document.createElement('tr');
-	    	var td_number = document.createElement('td');
-	    	var td_name = document.createElement('td');
-	    	var td_full_name = document.createElement('td');
-	    	var td_url = document.createElement('td');
-	    	var td_lang = document.createElement('td');
-	    	
-	    	td_number.innerHTML = repo+1;
-	    	td_name.innerHTML = repos[repo]["name"];
-	    	td_full_name.innerHTML = repos[repo]["full_name"];
-	    	td_url.innerHTML = repos[repo]["url"];
-	    	td_lang.innerHTML = repos[repo]["language"];
-
-	     	tr.appendChild(td_number);
-	     	tr.appendChild(td_name);
-	     	tr.appendChild(td_full_name);
-	     	tr.appendChild(td_url);
-	     	tr.appendChild(td_lang);
-			tbl_repo.appendChild(tr);
-
-    	}
-    	document.getElementById("repos").appendChild(tbl_repo);    	
-
-
-
-    }
-    //body.appendChild(tbl);
-    document.getElementById("langs").innerHTML = tbl.outerHTML;
-    //console.log(tbl);
-}
-
-
-
-function setRepositoriesTable(data)
+function setLanguagesTable(data)
 {
   console.log(data);
   arrangement = 1;
   let repositories_table=`
+
+<h1>Languages:</h1>
+
+
+
     <table>
     <tr>
       <th>Number</th> <th>Lang</th> <th>Repos</th>
@@ -247,7 +147,7 @@ function setRepositoriesTable(data)
 
 
 
-function setLanguagesTables(data)
+function setRepositoriesTables(data)
 {
   language_counter = 1;
   
@@ -306,11 +206,10 @@ function setLanguagesTables(data)
 
 
 
-function tableCreate2(data)
+function tableCreate(data)
 {
-
-  setRepositoriesTable(data);
-  setLanguagesTables(data);
+  setLanguagesTable(data);
+  setRepositoriesTables(data);
 }
 
 
