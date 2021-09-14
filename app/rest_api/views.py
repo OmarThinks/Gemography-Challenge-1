@@ -8,12 +8,12 @@ from rest_framework.renderers import BrowsableAPIRenderer, JSONRenderer
 from rest_framework import viewsets
 # Create your views here.
 
-from .serializers import (GithubSearchRepoSerializer)
+from .serializers import (GithubSearchRepoSerializer,github_search_repos)
 
-from .github_search import (github_search_repos,get_ordered_repos_response)
+#from .github_search import (github_search_repos,get_ordered_repos_response)
 
 
-from .github_search import get_formatted_data
+#from .github_search import get_formatted_data
 
 
 
@@ -45,12 +45,12 @@ class GithubReopsViewSet(viewsets.ViewSet):
 	def list(self, request):
 		serializer = GithubSearchRepoSerializer(
 			data=request.query_params)
-		return get_ordered_repos_response(serializer)
+		return serializer.get_ordered_repos_response()
 
 	def create(self, request):
 		serializer = GithubSearchRepoSerializer(
 			data=request.data)
-		return get_ordered_repos_response(serializer)
+		return serializer.get_ordered_repos_response()
 
 
 
