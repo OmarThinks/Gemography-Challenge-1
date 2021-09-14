@@ -142,6 +142,11 @@ When submitting the result, it will look like this:
 
 
 
+### Validation:
+
+<img src="images/frontend_validation.gif">
+
+
 
 
 
@@ -165,22 +170,6 @@ These artifacts contain the results of the tests.
 
 
 
-
-
-
-
-# Todos:
-
-
-1. More Options when submitting the form, because Github has many more options
-2. Add GraphQL
-3. Enhance Frontend
-4. Communicate with Github GraphQLL API instead of RESTful API
-	- Each repository does not have only one language, rather, 
-	It uses several languages, when attempting to acess the languages of each repo, 
-	we face a problem, that is rate limit, or throttling.
-	- So when using the GraphQL API, you will be able to get the languages of 
-	each repository, not only the basic language of the repo
 
 
 
