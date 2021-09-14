@@ -38,6 +38,14 @@
 </form>
 
 <hr>
+
+<div>
+  <pre id="test_text"></pre>
+</div>
+
+
+
+
 <div id="langs"></div>
 <hr>
 <div id="repos"></div>
@@ -109,7 +117,7 @@ tableCreate2(resp.data);
 
 
 function tableCreate(data){
-    var body = document.body,
+    var body = document.body;
         tbl  = document.createElement('table');
       var tbdy = document.createElement('tbody');
 
@@ -231,7 +239,7 @@ function setRepositoriesTable(data)
       <td>${mydata["length"]}</td>
       </tr>
     `)}
-    ) + 
+    ).join("") + 
   `</table>`;
   document.getElementById("langs").innerHTML = repositories_table;  
 }
@@ -257,35 +265,40 @@ function setLanguagesTables(data)
     <b>Number of Repositories: ${languageData["length"]}</b>
     </h3>
     `+`
-    <table>
+<div>
+  <table>
     <tr>
       <th>Number</th> <th>Name</th> <th>Full Name</th>
       <th>url</th> <th>Language</th>
     </tr>
-  `+
+  ${
   languageData["repos"].map(
     (mydata)=>{
     //console.log(mydata);
     return (`
-      <tr>
+    <tr>
       <td>${arrangement++}</td>
       <td>${mydata["name"]}</td>
       <td>${mydata["full_name"]}</td>
       <td>${mydata["url"]}</td>
       <td>${mydata["language"]}</td>
-      </tr>
-    `)}
-    ) + 
-  `</table>`;
-
-
-    ;
+    </tr>
+    `);}).join("")}`+`
+  </table>
+</div>`;
 
   language_counter++;
   })
 
-  document.getElementById("langs").innerHTML = allLanguagesContent;
+  document.getElementById("repos").innerHTML = allLanguagesContent;
+
+  //console.log(allLanguagesContent);
 }
+
+
+
+
+
 
 
 
