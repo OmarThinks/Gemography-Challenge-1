@@ -89,7 +89,7 @@ $.ajax({
 })
 .done(function(resp){
 //console.log(resp);
-tableCreate(resp.data);
+tableCreate2(resp.data);
 
 })
 .catch(function(resp) {
@@ -152,7 +152,7 @@ for (var i = 0; i < data.length; i++) {
      	h.innerHTML  = (i+1)+") "+data[i].language + " ("+data[i].length+")";
     	document.getElementById("repos").appendChild(h);    	
  
-        tbl_repo  = document.createElement('table');
+      tbl_repo  = document.createElement('table');
     	var tr = document.createElement('tr');
     	var th_number = document.createElement('th');
     	var th_name = document.createElement('th');
@@ -210,7 +210,30 @@ for (var i = 0; i < data.length; i++) {
 }
 
 
+function tableCreate2(data)
+{
+  console.log(data);
+  arrangement = 1;
+  let repositories_table=`
+    <table>
+    <tr>
+      <th>Number</th> <th>Lang</th> <th>Repos</th>
+    </tr>
+  `+
+  data.map(
+    (mydata)=>{console.log(mydata);
+    return (`
+      <tr>
+      <td>${arrangement++}</td>
+      <td>${mydata["language"]}</td>
+      <td>${mydata["length"]}</td>
+      </tr>
+    `)}
+    ) + 
+  `</table>`
+  document.getElementById("langs").innerHTML = repositories_table;
 
+}
 
 
 
