@@ -8,7 +8,7 @@ from rest_api.views import (
 
 
 router = routers.DefaultRouter()
-router.register(r'again', GithubReopsViewSetAgain, basename ='githubreposagain')
+router.register(r'github/search', GithubReopsViewSetAgain, basename ='githubreposagain')
 
 
 urlpatterns = [

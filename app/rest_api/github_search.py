@@ -1,4 +1,4 @@
-from .serializers import (GithubSearchRepoSerializer, build_queries)
+from .serializers import (GithubSearchRepoSerializer)
 import requests
 import json
 
@@ -6,8 +6,55 @@ from rest_api.dummy_data import dummy_data
 from rest_framework.response import Response
 
 
-def handle_data(data):
+from pprint import pp
+
+"""
+Function:
+This gets the raw data of the github request,
+format it to the right way to be returned by the API.
+
+
+Input Example:
+
+[{'url': 'https://github.com/ErickWendel/semana-javascript-expert05',
+  'name': 'semana-javascript-expert05',
+  'full_name': 'ErickWendel/semana-javascript-expert05',
+  'language': 'JavaScript'},
+ {'url': 'https://github.com/StarRocks/starrocks',
+  'name': 'starrocks',
+  'full_name': 'StarRocks/starrocks',
+  'language': 'C++'},
+...
+]
+
+
+Output Example:
+
+[{'repos': [{'url': 'https://github.com/ErickWendel/semana-javascript-expert05',
+             'name': 'semana-javascript-expert05',
+             'full_name': 'ErickWendel/semana-javascript-expert05',
+             'language': 'JavaScript'},
+            {'url': 'https://github.com/EtherDream/web2img',
+             'name': 'web2img',
+             'full_name': 'EtherDream/web2img',
+             'language': 'JavaScript'},
+             ...
+             ],
+  'length': 7,
+  'language': 'JavaScript'},
+
+ {'repos': [...],
+  'length': 7,
+  'language': 'Python'},
+
+]
+
+ 
+
+"""
+def get_formatted_data(data):
 	#print(len(data))
+	#pp(data)
 	formatted_data = dict()
 	for repo in data:
 		lang = str(repo["language"])
@@ -26,11 +73,13 @@ def handle_data(data):
 	sorted_languages_names = sorted(formatted_data, 
 		key=lambda item: formatted_data[item]["length"],
 		reverse=True)
-	handled_data = []
+	final_formatted_data = []
 	for l_name in sorted_languages_names:
-		handled_data.append(
+		final_formatted_data.append(
 			formatted_data[l_name])
-	return handled_data
+	#pp(formatted_data)
+	#pp(final_formatted_data)
+	return final_formatted_data
 
 
 
@@ -54,7 +103,7 @@ def handle_queries(queries,records):
 				"language": item["language"]
 				}
 			items.append(item_data)
-	return handle_data(items[0:records])
+	return get_formatted_data(items[0:records])
 
 
 def github_search_repos(**kwargs):

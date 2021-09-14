@@ -8,7 +8,7 @@ from rest_framework.renderers import BrowsableAPIRenderer, JSONRenderer
 from rest_framework import viewsets
 # Create your views here.
 
-from .serializers import (GithubSearchRepoSerializer, build_queries)
+from .serializers import (GithubSearchRepoSerializer)
 
 from .github_search import (github_search_repos,get_ordered_repos_response)
 
