@@ -99,6 +99,12 @@ setTables(resp.data);
 })
 .catch(function(resp) {
   //console.log("resp",resp);
+
+  document.getElementById("langs").innerHTML = "";  
+  document.getElementById("repos").innerHTML = "";  
+
+
+
   var errors = resp.responseJSON;
   //console.log("errors",errors);
   for (err in errors) {
