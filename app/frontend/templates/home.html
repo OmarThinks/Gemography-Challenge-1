@@ -39,9 +39,6 @@
 
 <hr>
 
-<div>
-  <pre id="test_text"></pre>
-</div>
 
 
 
@@ -80,7 +77,7 @@ function submitForm()
 	var form_records = document.getElementById('form_records').value;
 	var form_date = document.getElementById('form_date').value;
 	var form_order = document.getElementById('form_order').value;
-	console.log(form_records, form_date, form_order);
+	//console.log(form_records, form_date, form_order);
 	zero_errors();
 
 	document.getElementById('langs').innerHTML = "Loading, Please Wait ...";
@@ -97,15 +94,16 @@ $.ajax({
 })
 .done(function(resp){
 //console.log(resp);
-tableCreate(resp.data);
+setTables(resp.data);
 
 })
 .catch(function(resp) {
-  var errors = resp.responseJSON.data;
-  //console.log(errors);
+  //console.log("resp",resp);
+  var errors = resp.responseJSON;
+  //console.log("errors",errors);
   for (err in errors) {
-  //console.log(err);
-  //console.log(errors[err][0]);
+  //console.log("err", err);
+  //console.log("err0", errors[err][0]);
   document.getElementById(err+"_error").innerHTML = errors[err][0];
 }
 });
@@ -152,9 +150,9 @@ function setRepositoriesTables(data)
   language_counter = 1;
   
   allLanguagesContent = "";
-  console.log(data);
+  //console.log(data);
   data.map((languageData)=>{
-    console.log(languageData);
+    //console.log(languageData);
     let arrangement = 1;
 
     allLanguagesContent += `
@@ -206,7 +204,7 @@ function setRepositoriesTables(data)
 
 
 
-function tableCreate(data)
+function setTables(data)
 {
   setLanguagesTable(data);
   setRepositoriesTables(data);
