@@ -210,7 +210,8 @@ for (var i = 0; i < data.length; i++) {
 }
 
 
-function tableCreate2(data)
+
+function setRepositoriesTable(data)
 {
   console.log(data);
   arrangement = 1;
@@ -221,7 +222,8 @@ function tableCreate2(data)
     </tr>
   `+
   data.map(
-    (mydata)=>{console.log(mydata);
+    (mydata)=>{
+    //console.log(mydata);
     return (`
       <tr>
       <td>${arrangement++}</td>
@@ -231,9 +233,44 @@ function tableCreate2(data)
     `)}
     ) + 
   `</table>`
-  document.getElementById("langs").innerHTML = repositories_table;
-
+  document.getElementById("langs").innerHTML = repositories_table;  
 }
+
+
+
+
+function setLanguagesTables(data)
+{
+  language_counter = 1;
+  
+  allLanguagesContent = "";
+
+  data.map((languageData)=>{
+    console.log(languageData);
+    allLanguagesContent += `
+    <h1>${language_counter}) ${languageData["language"]}</h1>
+    `;
+
+  language_counter++;
+  })
+
+  document.getElementById("langs").innerHTML = allLanguagesContent;
+}
+
+
+
+
+
+
+
+function tableCreate2(data)
+{
+
+  setRepositoriesTable(data);
+  setLanguagesTables(data);
+}
+
+
 
 
 
