@@ -63,13 +63,13 @@ def github_search_repos(**kwargs):
 	if not ser.is_valid():
 		return {"success":False, "data":ser.errors}
 	return {"success":True, 
-	"data": handle_queries(ser.save(),
+	"data": handle_queries(ser.get_github_urls(),
 		ser.validated_data["records"])}
 
 
 def get_ordered_repos_response(serializer):
 		serializer.is_valid(raise_exception=True)
-		github_request_urls = serializer.save()
+		github_request_urls = serializer.get_github_urls()
 		response = Response({"success":True,
 			"github_request_urls":github_request_urls, 
 			"data": handle_queries(github_request_urls,
