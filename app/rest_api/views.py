@@ -13,7 +13,7 @@ from .serializers import (GithubSearchRepoSerializer)
 from .github_search import (github_search_repos,get_ordered_repos_response)
 
 
-from .github_search import handle_queries
+from .github_search import get_formatted_data
 
 
 
@@ -38,7 +38,7 @@ def github_search_repo_view(request):
 
 
 
-class GithubReopsViewSetAgain(viewsets.ViewSet):
+class GithubReopsViewSet(viewsets.ViewSet):
 	serializer_class = GithubSearchRepoSerializer
 	renderer_classes = [JSONRenderer,BrowsableAPIRenderer]
 	

@@ -85,7 +85,49 @@ def get_formatted_data(data):
 
 
 
-def handle_queries(queries,records):
+
+"""
+Function:
+Get the formatted data for list of queries
+
+
+Input:
+[
+	'https://api.github.com/search/repositories?q=created:>2021-09-01&sort=stars&order=desc&per_page=100&page=1'
+]
+
+
+
+Output Example:
+
+[{'repos': [{'url': 'https://github.com/ErickWendel/semana-javascript-expert05',
+             'name': 'semana-javascript-expert05',
+             'full_name': 'ErickWendel/semana-javascript-expert05',
+             'language': 'JavaScript'},
+            {'url': 'https://github.com/EtherDream/web2img',
+             'name': 'web2img',
+             'full_name': 'EtherDream/web2img',
+             'language': 'JavaScript'},
+             ...
+             ],
+  'length': 7,
+  'language': 'JavaScript'},
+
+ {'repos': [...],
+  'length': 7,
+  'language': 'Python'},
+
+]
+
+
+"""
+
+
+
+
+
+
+def get_formatted_data_from_queries(queries,records):
 	print("queries",queries,flush=True)
 	#print("records",records,flush=True)
 	#print("records",type(records),flush=True)
@@ -106,21 +148,30 @@ def handle_queries(queries,records):
 	return get_formatted_data(items[0:records])
 
 
-def github_search_repos(**kwargs):
-	#print(kwargs)
-	ser = GithubSearchRepoSerializer(data = kwargs)
-	if not ser.is_valid():
-		return {"success":False, "data":ser.errors}
-	return {"success":True, 
-	"data": handle_queries(ser.get_github_urls(),
-		ser.validated_data["records"])}
-
 
 def get_ordered_repos_response(serializer):
 		serializer.is_valid(raise_exception=True)
 		github_request_urls = serializer.get_github_urls()
 		response = Response({"success":True,
 			"github_request_urls":github_request_urls, 
-			"data": handle_queries(github_request_urls,
+			"data": get_formatted_data_from_queries(github_request_urls,
 			serializer.validated_data["records"])})
 		return response	
+
+
+
+
+
+
+
+
+def github_search_repos(**kwargs):
+	#print(kwargs)
+	ser = GithubSearchRepoSerializer(data = kwargs)
+	if not ser.is_valid():
+		return {"success":False, "data":ser.errors}
+	return {"success":True, 
+	"data": get_formatted_data_from_queries(ser.get_github_urls(),
+		ser.validated_data["records"])}
+
+
