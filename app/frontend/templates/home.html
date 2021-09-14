@@ -79,8 +79,8 @@ function submitForm()
 	document.getElementById('repos').innerHTML = "Loading, Please Wait ...";
 
 $.ajax({
-  url: "/api/search",
-  type: "get", //send it through get method
+  url: "/api/github/search/",
+  type: "post", //send it through post method
   data: {
   	"date":form_date,
   	"order":form_order,
