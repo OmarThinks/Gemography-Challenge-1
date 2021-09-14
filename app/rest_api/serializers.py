@@ -204,13 +204,14 @@ class GithubSearchRepoSerializer(serializers.Serializer):
 		return github_urls
 
 	def get_ordered_repos_response(self):
-			self.is_valid(raise_exception=True)
-			github_request_urls = self.get_github_urls()
-			response = Response({"success":True,
-				"github_request_urls":github_request_urls, 
-				"data": get_formatted_data_from_queries(github_request_urls,
-				self.validated_data["records"])})
-			return response	
+		#Returns the response to the api
+		self.is_valid(raise_exception=True)
+		github_request_urls = self.get_github_urls()
+		response = Response({"success":True,
+			"github_request_urls":github_request_urls, 
+			"data": get_formatted_data_from_queries(github_request_urls,
+			self.validated_data["records"])})
+		return response	
 
 
 
