@@ -1,3 +1,6 @@
+testing=True
+
+
 from rest_framework import serializers
 
 from datetime import datetime
@@ -136,6 +139,9 @@ Output Example:
 
 
 def get_formatted_data_from_queries(queries,records):
+	if testing:
+		return dummy_data
+
 	print("queries",queries,flush=True)
 	#print("records",records,flush=True)
 	#print("records",type(records),flush=True)
@@ -144,6 +150,7 @@ def get_formatted_data_from_queries(queries,records):
 	items = []
 	#requests.get(q).json()["items"]
 	for q in queries:
+
 		requested_items = requests.get(q).json()["items"]
 		for item in requested_items:
 			item_data = {
