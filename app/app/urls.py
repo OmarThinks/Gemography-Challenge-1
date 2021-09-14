@@ -24,8 +24,8 @@ from frontend.views import (homepage)
 urlpatterns = [
     path('api/search/', github_search_repo_view),
 
-    path('', homepage),
     path('api/',include("rest_api.urls")),
+    path('',include("frontend.urls")),
 
 ]
 
