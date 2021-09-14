@@ -61,133 +61,52 @@ To print results in HTML file.
 
 # 1) Backend (RESTful API):
 
-The RESTful API has only one endpoint:
+The RESTful API has two endpoints:
 
-<h2> <a href="http://127.0.0.1:8000/api/search">http://127.0.0.1:8000/api/search</a>:</h2>
+
+## (GET) http://127.0.0.1:8000/api/github/search/:
+
 The inputs are passed as query parameters:
 
 - **`order`**: `asc` or `desc`
 - **`date`**:
-	- It has the format of **`YYYY-MM-DD`**
-	- Example: `2019-4-25`
+    - It has the format of **`YYYY-MM-DD`**
+    - Example: `2019-4-25`
 - **`records`**:
-	- How many repositories do you want to check
-	- Min Value : 1
-	- Max Value : 1000
+    - How many repositories do you want to check
+    - Min Value : 1
+    - Max Value : 1000
 
-## Example:
-
-<b>
-
-```
-http://127.0.0.1:8000/api/search?date=2019-04-25&order=desc&records=100
-```
-</b>
+## (POST) http://127.0.0.1:8000/api/github/search/:
 
 
-The response will look like:
+The same as the previous, but input is passed in request body.
 
 
-<b>
-
-```json
-{
-    "success": true,
-    "data": [
-        {
-            "repos": [
-                {
-                    "url": "https://github.com/neherlab/covid19_scenarios",
-                    "name": "covid19_scenarios",
-                    "full_name": "neherlab/covid19_scenarios",
-                    "language": "JavaScript"
-                },
-                {
-                    "url": "https://github.com/mandatoryprogrammer/CursedChrome",
-                    "name": "CursedChrome",
-                    "full_name": "mandatoryprogrammer/CursedChrome",
-                    "language": "JavaScript"
-                },
-                ...
-            ],
-            "length": 15,
-            "language": "JavaScript"
-        },
-        {
-            "repos": [
-                {
-                    "url": "https://github.com/timothycrosley/portray",
-                    "name": "portray",
-                    "full_name": "timothycrosley/portray",
-                    "language": "Python"
-                },
-                {
-                    "url": "https://github.com/sustrik/uxy",
-                    "name": "uxy",
-                    "full_name": "sustrik/uxy",
-                    "language": "Python"
-                },
-                ...
-            ],
-            "length": 14,
-            "language": "Python"
-        },
-        {
-            "repos": [
-                {
-                    "url": "https://github.com/prisma/migrate",
-                    "name": "migrate",
-                    "full_name": "prisma/migrate",
-                    "language": "TypeScript"
-                },
-                {
-                    "url": "https://github.com/coderoad/coderoad-vscode",
-                    "name": "coderoad-vscode",
-                    "full_name": "coderoad/coderoad-vscode",
-                    "language": "TypeScript"
-                },
-                ...
-            ],
-            "length": 7,
-            "language": "TypeScript"
-        },
-        ...
-    ]
-}
-```
-
-</b>
 
 
-## Displaying errors:
+# Examples:
+
+<img src="images/get_endpoint.gif">
 
 
-<b>
+### The date field:
 
-```
-http://127.0.0.1:8000/api/search
-```
-</b>
+<img src="images/date_field.gif">
 
 
-The response will look like:
+
+### The order field:
+
+<img src="images/order_field.gif">
 
 
-<b>
+### Validation:
 
-```json
-{
-	"success":false,
-	"data":
-	{
-		"date":["This field is required."],
-		"order":["This field is required."],
-		"records":["This field is required."]
-	}
-}
-```
+<img src="images/validation.gif">
 
-</b>
+
+
 
 
 
