@@ -214,15 +214,3 @@ class GithubSearchRepoSerializer(serializers.Serializer):
 		return response	
 
 
-
-
-def github_search_repos(**kwargs):
-	#print(kwargs)
-	ser = GithubSearchRepoSerializer(data = kwargs)
-	if not ser.is_valid():
-		return {"success":False, "data":ser.errors}
-	return {"success":True, 
-	"data": get_formatted_data_from_queries(ser.get_github_urls(),
-		ser.validated_data["records"])}
-
-

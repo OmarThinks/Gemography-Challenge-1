@@ -17,15 +17,11 @@ from django.contrib import admin
 from django.urls import path, include
 
 
-from rest_api.views import (github_search_repo_view)
 from frontend.views import (homepage)
 
 
 urlpatterns = [
-    path('api/search/', github_search_repo_view),
-
     path('api/',include("rest_api.urls")),
     path('',include("frontend.urls")),
-
 ]
 

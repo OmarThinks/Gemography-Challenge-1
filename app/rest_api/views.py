@@ -8,34 +8,12 @@ from rest_framework.renderers import BrowsableAPIRenderer, JSONRenderer
 from rest_framework import viewsets
 # Create your views here.
 
-from .serializers import (GithubSearchRepoSerializer,github_search_repos)
+from .serializers import (GithubSearchRepoSerializer)
 
 #from .github_search import (github_search_repos,get_ordered_repos_response)
 
 
 #from .github_search import get_formatted_data
-
-
-
-
-@api_view(['GET'])
-def github_search_repo_view(request):
-	params = request.query_params
-	#print(dict(params),flush=True)
-	q_params={}
-	for key in params:
-		q_params[key] = params[key]
-	#print(dict(q_params),flush=True)
-	result = github_search_repos(**q_params)
-	
-	#print(json.dumps(result,indent=4),flush=True)
-	
-	if result["success"]:
-		return Response(result)
-	return Response(result, 
-			status=status.HTTP_422_UNPROCESSABLE_ENTITY)
-
-
 
 
 class GithubReopsViewSet(viewsets.ViewSet):
