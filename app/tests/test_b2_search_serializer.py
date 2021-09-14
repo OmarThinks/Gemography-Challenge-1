@@ -1,6 +1,5 @@
 import unittest
-from rest_api.serializers import (
-	build_queries, GithubSearchRepoSerializer)
+from rest_api.serializers import GithubSearchRepoSerializer
 
 
 """
@@ -63,7 +62,7 @@ class GithubSearchRepoSerializerTestCase(unittest.TestCase):
 	def test_006_queries(self):
 		ser = GithubSearchRepoSerializer(data=self.success_data)
 		self.assertEqual(ser.is_valid(),True)
-		queries = ser.save()
+		queries = ser.get_github_urls()
 		#print(queries)
 		self.assertEqual(queries,[
 			'https://api.github.com/search/'+

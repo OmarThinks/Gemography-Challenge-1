@@ -143,7 +143,7 @@ def get_formatted_data_from_queries(queries,records):
 	if testing:
 		return get_formatted_data(dummy_data["data"])
 
-	print("queries",queries,flush=True)
+	#print("queries",queries,flush=True)
 	#print("records",records,flush=True)
 	#print("records",type(records),flush=True)
 	# get the response from the URL

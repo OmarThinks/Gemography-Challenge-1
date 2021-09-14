@@ -1,5 +1,5 @@
 import unittest
-from rest_api.github_search import github_search_repos
+from rest_api.serializers import GithubSearchRepoSerializer
 import json
 
 """
@@ -16,17 +16,21 @@ pytest -rP --junitxml=test-reports/junit.xml --html=test-reports/pytest_report.h
 
 
 
-class GithubSearchRepoSerializerTestCase(unittest.TestCase):
-	def setUp(self):
-		self.success_data = {
-			"date":"2019-04-29", "order":"desc", "records":99}
-	
+class GithubSearchRepoSerializerTestCase(unittest.TestCase):	
 	def test_001_success(self):
-		search_results = github_search_repos(
-			**self.success_data)
-		self.assertEqual(search_results["success"],True)
+		serializer = GithubSearchRepoSerializer(data ={
+			"date" : "2019-04-29", 
+			"order" : "desc", 
+			"records":99
+			})
+		serializer.is_valid()
+		search_results = serializer.get_ordered_repos_response().data
+
+
 		#print(search_results)
 		#print(json.dumps(search_results, indent=4, sort_keys=True))
+		
+		self.assertEqual(search_results["success"],True)
 		data = search_results["data"]
 		for language in data:
 			self.assertEqual(type(language["language"]),str)
