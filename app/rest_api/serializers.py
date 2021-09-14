@@ -19,8 +19,10 @@ import json
 from rest_api.dummy_data import dummy_data
 from rest_framework.response import Response
 
-
-from pprint import pp
+try:
+	from pprint import pp
+except Exception as e:
+	pass
 
 """
 Function:
