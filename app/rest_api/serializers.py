@@ -2,7 +2,10 @@ from rest_framework import serializers
 
 from datetime import datetime
 
-def build_queries(date, order, records):
+def build_queries(serializer):
+	date = serializer.validated_data["date"]
+	order = serializer.validated_data["order"]
+	records = serializer.validated_data["records"]
 	pages = int((records-1)/100) + 1
 	queries = []
 	for page in range(1,pages+1):
@@ -38,4 +41,4 @@ class GithubSearchRepoSerializer(serializers.Serializer):
 		return date
 
 	def create(self, validated_data):
-		return build_queries(**validated_data)
+		return build_queries(self)

@@ -69,9 +69,9 @@ def github_search_repos(**kwargs):
 
 def get_ordered_repos_response(serializer):
 		serializer.is_valid(raise_exception=True)
-		github_request_url = serializer.save()
+		github_request_urls = serializer.save()
 		response = Response({"success":True,
-			"github_request_url":github_request_url, 
-			"data": handle_queries(github_request_url,
+			"github_request_urls":github_request_urls, 
+			"data": handle_queries(github_request_urls,
 			serializer.validated_data["records"])})
 		return response	
