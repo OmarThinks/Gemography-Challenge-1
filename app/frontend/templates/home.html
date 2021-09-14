@@ -232,7 +232,7 @@ function setRepositoriesTable(data)
       </tr>
     `)}
     ) + 
-  `</table>`
+  `</table>`;
   document.getElementById("langs").innerHTML = repositories_table;  
 }
 
@@ -244,12 +244,42 @@ function setLanguagesTables(data)
   language_counter = 1;
   
   allLanguagesContent = "";
-
+  console.log(data);
   data.map((languageData)=>{
     console.log(languageData);
+    let arrangement = 1;
+
     allLanguagesContent += `
-    <h1>${language_counter}) ${languageData["language"]}</h1>
-    `;
+    <h1>${language_counter}) ${languageData["language"]}
+    (${languageData["length"]})</h1>
+    
+    <h3>
+    <b>Number of Repositories: ${languageData["length"]}</b>
+    </h3>
+    `+`
+    <table>
+    <tr>
+      <th>Number</th> <th>Name</th> <th>Full Name</th>
+      <th>url</th> <th>Language</th>
+    </tr>
+  `+
+  languageData["repos"].map(
+    (mydata)=>{
+    //console.log(mydata);
+    return (`
+      <tr>
+      <td>${arrangement++}</td>
+      <td>${mydata["name"]}</td>
+      <td>${mydata["full_name"]}</td>
+      <td>${mydata["url"]}</td>
+      <td>${mydata["language"]}</td>
+      </tr>
+    `)}
+    ) + 
+  `</table>`;
+
+
+    ;
 
   language_counter++;
   })
