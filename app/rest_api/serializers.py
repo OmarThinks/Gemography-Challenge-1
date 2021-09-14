@@ -1,4 +1,5 @@
 testing=True
+#testing=False
 
 
 from rest_framework import serializers
@@ -140,7 +141,7 @@ Output Example:
 
 def get_formatted_data_from_queries(queries,records):
 	if testing:
-		return dummy_data
+		return get_formatted_data(dummy_data["data"])
 
 	print("queries",queries,flush=True)
 	#print("records",records,flush=True)
@@ -150,7 +151,6 @@ def get_formatted_data_from_queries(queries,records):
 	items = []
 	#requests.get(q).json()["items"]
 	for q in queries:
-
 		requested_items = requests.get(q).json()["items"]
 		for item in requested_items:
 			item_data = {
