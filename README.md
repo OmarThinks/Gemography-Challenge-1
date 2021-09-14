@@ -121,10 +121,9 @@ The application has a frontend in this url:
 The frontend looks like this:
 
 
----
+### Input Fields:
 
-
-<img src="images/frontend_1.png">
+<img src="images/frontend_input.png">
 
 
 ---
@@ -132,12 +131,14 @@ The frontend looks like this:
 When submitting the result, it will look like this:
 
 
+### Languages:
 
-<img src="images/frontend_2.png">
+<img src="images/frontend_languages.png">
 
----
 
-<img src="images/frontend_3.png">
+### Repositories of each language:
+
+<img src="images/frontend_repos.png">
 
 
 
